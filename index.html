@@ -1,24 +1,189 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple Chat App - Aplikasi Chat Modern & Responsif</title>
-    <meta name="description" content="Aplikasi chat online sederhana dengan desain modern seperti WhatsApp. Fitur real-time chat, user online/offline, dan animasi smooth." />
-    <meta name="author" content="Simple Chat App" />
+    <meta name="description" content="Aplikasi chat online sederhana dengan desain modern seperti WhatsApp. Fitur real-time chat, user online/offline, dan animasi smooth.">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Landing Page -->
+    <div id="landing-page" class="page active">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-icon">
+                    <i class="fas fa-comments"></i>
+                </div>
+                
+                <h1>Simple Chat App</h1>
+                
+                <p class="hero-description">
+                    Aplikasi chat sederhana dan modern dengan tampilan yang clean dan responsif.
+                    Mulai mengobrol sekarang!
+                </p>
 
-    <meta property="og:title" content="Simple Chat App - Aplikasi Chat Modern" />
-    <meta property="og:description" content="Chat online dengan tampilan modern dan responsif. Fitur user list, bubble chat, dan animasi smooth." />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+                <button class="btn btn-primary" onclick="showLogin()">
+                    Mulai Chat
+                </button>
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@lovable_dev" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-  </head>
+                <div class="features">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3>Cepat & Ringan</h3>
+                        <p>Interface modern dengan performa optimal</p>
+                    </div>
 
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>User Friendly</h3>
+                        <p>Desain intuitif seperti WhatsApp</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h3>Real-time Chat</h3>
+                        <p>Simulasi percakapan real-time yang smooth</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Page -->
+    <div id="login-page" class="page">
+        <div class="login-container">
+            <div class="login-card">
+                <div class="login-header">
+                    <div class="login-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h1>Simple Chat App</h1>
+                    <p>Masuk untuk mulai mengobrol</p>
+                </div>
+
+                <form id="login-form" class="login-form">
+                    <div class="input-group">
+                        <input 
+                            type="text" 
+                            id="username" 
+                            placeholder="Masukkan username Anda..." 
+                            required
+                            minlength="2"
+                        >
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-full">
+                        Masuk
+                    </button>
+                </form>
+
+                <div class="login-footer">
+                    <p>Tidak perlu password, cukup username saja!</p>
+                </div>
+
+                <button class="btn-back" onclick="showLanding()">
+                    <i class="fas fa-arrow-left"></i> Kembali
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chat Page -->
+    <div id="chat-page" class="page">
+        <div class="chat-container">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <!-- Groups Section -->
+                <div class="sidebar-section">
+                    <div class="sidebar-header">
+                        <h2>Groups</h2>
+                    </div>
+                    <div class="group-list" id="group-list">
+                        <!-- Groups will be populated by JavaScript -->
+                    </div>
+                </div>
+                
+                <!-- Users Section -->
+                <div class="sidebar-section">
+                    <div class="sidebar-header">
+                        <h2>Users</h2>
+                        <p class="online-count">0 online</p>
+                    </div>
+                    <div class="user-list" id="user-list">
+                        <!-- Users will be populated by JavaScript -->
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Chat Area -->
+            <main class="chat-main">
+                <!-- Chat Header -->
+                <header class="chat-header">
+                    <div class="chat-info">
+                        <h1 id="chat-title">General</h1>
+                        <p id="chat-subtitle">Group chat</p>
+                    </div>
+                    
+                    <div class="user-info">
+                        <div class="user-details">
+                            <p class="username" id="current-username">User</p>
+                            <p class="status">Online</p>
+                        </div>
+                        <button class="btn-logout" onclick="logout()" title="Keluar">
+                            <i class="fas fa-right-from-bracket"></i>
+                        </button>
+                    </div>
+                </header>
+                
+                <!-- Messages Area -->
+                <div class="messages-container" id="messages-container">
+                    <div class="messages" id="messages">
+                        <!-- Messages will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Chat Input -->
+                <form class="chat-input" id="chat-form">
+                    <div class="input-container">
+                        <input 
+                            type="text" 
+                            id="message-input" 
+                            placeholder="Ketik pesan..."
+                            autocomplete="off"
+                        >
+                        <button type="submit" class="btn-send" id="send-btn" disabled>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </form>
+            </main>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <div class="toast-content">
+            <i class="toast-icon"></i>
+            <span class="toast-message"></span>
+        </div>
+    </div>
+
+    <!-- Socket.IO -->
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script src="script.js"></script>
+</body>
 </html>
